@@ -1,32 +1,33 @@
 import './App.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
+
+  const [text, setText] = useState('loading ...');
 
   useEffect(() => {
     // GET request
     fetch('http://localhost:8080/getresponse')
-      .then(response => {
-        return response.text()
+      .then(response => response.text())
+      .then(responsetext => {
+        setText(responsetext)
       })
-      .then(text => {
-        console.log(text)
+      .catch((error) => {
+        console.error("NetworkError: The server isn't reachable" + error)
+        setText("Server is not reachable, please try again later")
       })
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload. 
-        </p>
         <a
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          {text}
         </a>
       </header>
     </div>
