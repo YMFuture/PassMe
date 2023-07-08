@@ -4,18 +4,20 @@ package com.passmeindustries.PassMe;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.util.Objects;
 
 @Entity
-public class SysUser {
+@Table(name = "users")
+public class User {
     private @Id @GeneratedValue Long id;
     private String username;
     private String password;
 
-    SysUser(){}
+    public User(){}
 
-    SysUser(String username, String password){
+    public User(String username, String password){
         this.username = username;
         this.password = password;
     }
@@ -48,8 +50,8 @@ public class SysUser {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SysUser sysUser = (SysUser) o;
-        return Objects.equals(id, sysUser.id) && Objects.equals(username, sysUser.username) && Objects.equals(password, sysUser.password);
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password);
     }
 
     @Override
